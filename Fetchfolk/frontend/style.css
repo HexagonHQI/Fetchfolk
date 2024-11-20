@@ -1,0 +1,130 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f5f5dc; /* Cream color background */
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #f5f5dc;
+    padding: 10px 20px;
+    color: black;
+}
+.navbar-brand {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    font-size: 28px;
+    margin-right: 20px;
+}
+.nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.nav-item {
+    margin-left: 15px;
+}
+.nav-link {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+}
+.nav-link:hover, .nav-item.active .nav-link {
+    background-color: #ffdd57;
+    color: white;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1s ease-in-out;
+}
+.hero-slide.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+.hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Specific Slides */
+.hero-slide.slide1 {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Delta_737-900ER_N805DN_on_final_approach_to_Boston_Oct_2024_2.jpg/512px-Delta_737-900ER_N805DN_on_final_approach_to_Boston_Oct_2024_2.jpg?20241112040424');
+}
+
+.hero-slide.slide2 {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Signing_for_a_parcel_delivery_on_a_phone.jpg/512px-Signing_for_a_parcel_delivery_on_a_phone.jpg?20220712132131');
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.hero h1 {
+    font-size: 50px;
+    margin: 0;
+}
+.hero p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+.hero button {
+    padding: 10px 30px;
+    font-size: 18px;
+    background-color: #ffdd57;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.hero button:hover {
+    background-color: #f0a500;
+}
+
+/* Section Styles */
+section {
+    padding: 100px 20px;
+    min-height: 100vh;
+}
+
+#home {
+    background-color: #f0f0f0;
+}
+
+#about {
+    background-color: #e0e0e0;
+}
+
+#services {
+    background-color: #d0d0d0;
+}
+
+#contact {
+    background-color: #c0c0c0;
+}

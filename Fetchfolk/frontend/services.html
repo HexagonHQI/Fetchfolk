@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FetchFolk - Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5dc;
+        }
+        .services {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .services h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+        .option {
+            background-color: #ffdd57;
+            padding: 20px 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .option:hover {
+            background-color: #f0a500;
+        }
+        .option h2 {
+            font-size: 1.8rem;
+        }
+        .option p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="services">
+        <h1>Choose Your Role</h1>
+        <div class="options">
+            <div class="option" onclick="navigateTo('traveler')">
+                <h2>Traveler (Carrier)</h2>
+                <p>Earn money by carrying goods for others.</p>
+            </div>
+            <div class="option" onclick="navigateTo('recipient')">
+                <h2>Recipient (Service Requester)</h2>
+                <p>Receive your goods from travelers during chosen dates.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function navigateTo(role) {
+            if (role === 'traveler') {
+                window.location.href = 'traveler.html'; // Redirect to traveler page
+            } else if (role === 'recipient') {
+                window.location.href = 'recipient.html'; // Redirect to recipient page
+            }
+        }
+    </script>
+</body>
+</html>

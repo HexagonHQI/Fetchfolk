@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FetchFolk - Simplified Modern Design</title>
+    
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f5f5dc; /* Cream color background */
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #f5f5dc;
+            padding: 10px 20px;
+            color: black;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            text-decoration: none;
+            color: black;
+            font-size: 28px;
+            margin-right: 20px;
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin-left: 15px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
+        }
+
+        .nav-link:hover,
+        .nav-item.active .nav-link {
+            background-color: #ffdd57;
+            color: white;
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+
+        .hero .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero .hero-slide.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .hero .hero-slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .hero button {
+            padding: 10px 30px;
+            font-size: 18px;
+            background-color: #ffdd57;
+            color: black;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero button:hover {
+            background-color: #f0a500;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <a class="navbar-brand" href="#">FetchFolk</a>
+        <ul class="nav">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-slide active" 
+             style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Delta_737-900ER_N805DN_on_final_approach_to_Boston_Oct_2024_2.jpg/512px-Delta_737-900ER_N805DN_on_final_approach_to_Boston_Oct_2024_2.jpg?20241112040424 ');">
+        </div>
+        <div class="hero-slide hidden" 
+             style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Signing_for_a_parcel_delivery_on_a_phone.jpg/512px-Signing_for_a_parcel_delivery_on_a_phone.jpg?20220712132131');">
+        </div>
+
+        <div class="hero-content">
+            <h1>Connecting People Worldwide</h1>
+            <p>Empowering travelers and local partners to make connections across the globe</p>
+            <button onclick="navigateToServices()">Explore Our Services</button>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <div id="home">
+        <section>
+            <h2>Home Section</h2>
+            <p>Welcome to FetchFolk! We provide a variety of services to help you achieve your goals. Explore our offerings and find out how we can assist you today.</p>
+        </section>
+    </div>
+
+    <!-- About Section -->
+    <div id="about">
+        <section>
+            <h2>About Section</h2>
+            <p>At FetchFolk, we are dedicated to providing top-notch services tailored to your needs. Our team of experts is here to ensure your satisfaction and success.</p>
+        </section>
+    </div>
+
+    <!-- Services Section -->
+    <div id="services">
+        <section>
+            <h2>Services Section</h2>
+            <p>We offer a range of services including consulting, project management, and support. Our goal is to help you navigate your challenges and achieve your objectives efficiently.</p>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact">
+        <section>
+            <h2>Contact Section</h2>
+            <p>If you have any questions or would like to get in touch, please reach out to us through our contact form or email us directly. We look forward to hearing from you!</p>
+        </section>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Automatic Slide Show
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+
+        function changeSlide() {
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('hidden');
+
+            currentSlide = (currentSlide + 1) % slides.length;
+
+            slides[currentSlide].classList.remove('hidden');
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Change slide every 5 seconds
+        setInterval(changeSlide, 5000);
+
+        // Navigate to services.html
+        function navigateToServices() {
+            window.location.href = 'services.html'; // Ensure services.html is in the same directory
+        }
+    </script>
+</body>
+
+</html>

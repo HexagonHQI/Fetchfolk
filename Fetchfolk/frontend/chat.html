@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - FetchFolk</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5dc;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        #messages {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+        }
+        .message {
+            margin: 5px 0;
+        }
+        .message .sender {
+            font-weight: bold;
+        }
+        .message .text {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Chat</h2>
+    <div id="messages"></div>
+    <input type="text" id="messageInput" placeholder="Type your message..." />
+    <button id="sendButton">Send</button>
+
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // Replace these with actual user IDs
+        const travelerId = "yourTravelerId"; // Get from session or user context
+        const recipientId = "yourRecipientId"; // Get from session or user context
+
+        // Function to fetch messages (example)
+        async function fetchMessages() {
+            // Fetch messages from the server
+            const response = await fetch(`http://localhost:3000/api/chat/messages?travelerId=${travelerId}&recipientId=${recipientId}`);
+            const messages = await response.json();
+            displayMessages(messages);
+        }
+
+        // Function to display messages
+        function displayMessages(messages) {
+            messagesDiv.innerHTML = messages.map(message => `
+                <div class="message">
+                    <span class="sender">${message.sender}:</span>
+                    <span class="text">${message.text}</span>
+                </div>
+            `).join('');
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to bottom
+        }
+
+        // Function to send a message
+        async function sendMessage() {
+            const text = messageInput.value;
+            if (!text) return;
+
+            const response = await fetch('http://localhost:3000/api/chat/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ travelerId, recipientId, text })
+            });
+
+            const data = await response.json();
+            messageInput.value = ''; // Clear input
+            fetchMessages(); // Refresh messages
+        }
+
+        // Event listener for send button
+        sendButton.addEventListener('click', sendMessage);
+
+        // Fetch messages when the chat page loads
+        fetchMessages();
+        // Optionally, set an interval to fetch new messages every few seconds
+        setInterval(fetchMessages, 5000); // Fetch new messages every 5 seconds
+    </script>
+</body>
+</html>

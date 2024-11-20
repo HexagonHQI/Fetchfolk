@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipient - FetchFolk</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5dc;
+            text-align: center;
+            padding: 50px;
+        }
+        h2 {
+            color: #333;
+        }
+        .loading {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Recipient Information</h2>
+    <form id="recipientForm">
+        <label>Flight Date: <input type="date" id="flightDate" required></label><br>
+        <label>From: <input type="text" id="fromLocation" required></label><br>
+        <label>To: <input type="text" id="toLocation" required></label><br>
+        <button type="submit">Find Travelers</button>
+    </form>
+
+    <div class="loading">Loading...</div>
+    <div id="matches"></div>
+
+    <script>
+        const form = document.getElementById('recipientForm');
+        const matchesDiv = document.getElementById('matches');
+        const loadingDiv = document.querySelector('.loading');
+
+        form.addEvent .addEventListener('submit', async (e) => {
+            e.preventDefault();
+            loadingDiv.style.display = 'block'; // Show loading
+
+            const flightDate = document.getElementById('flightDate').value;
+            const from = document.getElementById('fromLocation').value;
+            const to = document.getElementById('toLocation').value;
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/match?flightDate=${flightDate}&from=${from}&to=${to}`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const matches = await response.json();
+
+                matchesDiv.innerHTML = matches.map(match => `
+                    <div>
+                        <p>Traveler: ${match.name}</p>
+                        <button onclick="connectWithTraveler('${match._id}')">Connect</button>
+                    </div>
+                `).join('');
+            } catch (error) {
+                alert('Error fetching matches: ' + error.message);
+            } finally {
+                loadingDiv.style.display = 'none'; // Hide loading
+            }
+        });
+
+        async function connectWithTraveler(travelerId) {
+            const recipientId = "yourRecipientId"; // Replace with logged-in recipient ID
+
+            // Logic to connect with the traveler (optional)
+            await fetch('http://localhost:3000/api/connect', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ travelerId, recipientId, details: { goodsDescription: "Books", weight: "2kg" } })
+            });
+
+            // Redirect to chat page
+            window.location.href = `chat.html?travelerId=${travelerId}&recipientId=${recipientId}`;
+        }
+    </script>
+</body>
+</html>

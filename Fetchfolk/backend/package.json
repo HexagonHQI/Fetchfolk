@@ -1,0 +1,16 @@
+{
+    "name": "fetchfolk",
+    "version": "1.0.0",
+    "description": "A web application for managing item requests and user profiles.",
+    "main": "server.js",
+    "scripts": {
+      "start": "node backend/server.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1",
+      "mongoose": "^5.10.9"
+    },
+    "devDependencies": {},
+    "author": "Your Name",
+    "license": "ISC"
+  }
